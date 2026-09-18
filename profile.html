@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cacaspy — profile</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding-bottom: 6rem; }
+    .page-switch {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      padding: 0.75rem;
+      background: #0b1020;
+      border-top: 1px solid rgba(124, 255, 178, 0.22);
+    }
+    .page-switch a {
+      padding: 0.45rem 1rem;
+      border: 1px solid #7cffb2;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #7cffb2;
+    }
+    .page-switch a.current {
+      background: #7cffb2;
+      color: #0b1020;
+    }
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -46,5 +72,10 @@
 
     <footer>Not affiliated with any studio · just a player page</footer>
   </div>
+
+  <nav class="page-switch" aria-label="Pages">
+    <a href="index.html">Page 1 · Bio</a>
+    <a class="current" href="profile.html">Page 2 · Profile</a>
+  </nav>
 </body>
 </html>
