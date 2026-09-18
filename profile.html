@@ -4,52 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>cacaspy — profile</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
   <style>
-    body { padding-bottom: 6rem; }
+    html, body { margin: 0; min-height: 100%; background: #000; color: #d6ffd6; font-family: "Smooch Sans", sans-serif; }
+    #matrix {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; display: block;
+    }
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 860px; margin: 0 auto;
+      padding: 2rem 1.5rem 7rem;
+      text-shadow: 0 0 10px #000;
+    }
+    header { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+    .logo { letter-spacing: 0.12em; color: #00ff41; }
+    a { color: #7cffb2; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .card {
+      background: rgba(0,20,0,0.72);
+      border: 1px solid #00ff41;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+    .muted { color: #8fbf8f; }
     .page-switch {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 2;
+      display: flex; gap: 0.5rem; justify-content: center;
       padding: 0.75rem;
-      background: #0b1020;
-      border-top: 1px solid rgba(124, 255, 178, 0.22);
+      background: rgba(0,0,0,0.78);
+      border-top: 1px solid #00ff41;
     }
     .page-switch a {
       padding: 0.45rem 1rem;
-      border: 1px solid #7cffb2;
+      border: 1px solid #00ff41;
       border-radius: 999px;
       text-decoration: none;
-      color: #7cffb2;
+      color: #00ff41;
     }
-    .page-switch a.current {
-      background: #7cffb2;
-      color: #0b1020;
-    }
+    .page-switch a.current { background: #00ff41; color: #000; }
   </style>
 </head>
 <body>
+  <canvas id="matrix"></canvas>
+
   <div class="wrap">
     <header>
       <div class="logo">CACASPY</div>
-      <nav>
-        <a href="index.html">Bio</a>
-        <a class="active" href="profile.html">Gaming profile</a>
-      </nav>
     </header>
-
-    <p class="tag">player card</p>
+    <p>player card</p>
     <h1>cacaspy</h1>
-    <p class="lede">Same name on GitHub, Steam, and most lobbies. Add the real IDs below when you want people to find you.</p>
-
+    <p>Same name on GitHub, Steam, and most lobbies.</p>
     <div class="grid">
       <section class="card">
         <h2>Identity</h2>
-        <p class="stat">cacaspy</p>
+        <p>cacaspy</p>
         <p class="muted">PC · Linux · occasional Quest 3S</p>
       </section>
       <section class="card">
@@ -62,20 +73,43 @@
       </section>
       <section class="card">
         <h2>Find me</h2>
-        <p>
-          GitHub: <a href="https://github.com/cacaspy">cacaspy</a><br />
-          Steam: <span class="muted">add your profile URL</span><br />
-          Discord: <span class="muted">add your tag</span>
-        </p>
+        <p>GitHub: <a href="https://github.com/cacaspy">cacaspy</a><br>
+        Steam: add your profile URL<br>
+        Discord: add your tag</p>
       </section>
     </div>
-
-    <footer>Not affiliated with any studio · just a player page</footer>
   </div>
 
   <nav class="page-switch" aria-label="Pages">
     <a href="index.html">Page 1 · Bio</a>
     <a class="current" href="profile.html">Page 2 · Profile</a>
   </nav>
+
+  <script>
+    const c = document.getElementById("matrix");
+    const ctx = c.getContext("2d");
+    const letters = "01カサcacaspyアイウエオ01".split("");
+    let cols, drops, size = 16;
+    function resize() {
+      c.width = innerWidth; c.height = innerHeight;
+      cols = Math.floor(c.width / size);
+      drops = Array(cols).fill(1);
+    }
+    function draw() {
+      ctx.fillStyle = "rgba(0,0,0,0.08)";
+      ctx.fillRect(0, 0, c.width, c.height);
+      ctx.fillStyle = "#00ff41";
+      ctx.font = size + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        ctx.fillText(letters[Math.floor(Math.random() * letters.length)], i * size, drops[i] * size);
+        if (drops[i] * size > c.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+      requestAnimationFrame(draw);
+    }
+    addEventListener("resize", resize);
+    resize();
+    draw();
+  </script>
 </body>
 </html>
