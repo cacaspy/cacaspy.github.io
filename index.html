@@ -3,46 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My first GitHub Page</title>
+  <title>cacaspy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Smooch+Sans:wght@100..900&display=swap" rel="stylesheet">
   <style>
-    body {
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #000;
+      color: #d6ffd6;
       font-family: "Smooch Sans", sans-serif;
-      max-width: 640px;
-      margin: 4rem auto;
-      padding: 0 1.5rem 6rem;
-      line-height: 1.5;
     }
+
+    .bg {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem 7rem;
+      text-shadow: 0 0 12px #000, 0 2px 10px #000;
+    }
+
+    a { color: #7cffb2; }
+
     .page-switch {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
+      z-index: 2;
       display: flex;
       gap: 0.5rem;
       justify-content: center;
       padding: 0.75rem;
-      background: #fff;
-      border-top: 1px solid #ddd;
+      background: rgba(0, 0, 0, 0.72);
+      border-top: 1px solid #00ff41;
     }
     .page-switch a {
       padding: 0.45rem 1rem;
-      border: 1px solid #222;
+      border: 1px solid #00ff41;
       border-radius: 999px;
       text-decoration: none;
-      color: #222;
+      color: #00ff41;
     }
     .page-switch a.current {
-      background: #222;
-      color: #fff;
+      background: #00ff41;
+      color: #000;
     }
   </style>
 </head>
 <body>
-  <h1>Hello from GitHub Pages</h1>
-  <p>This page is live because the files live in a GitHub repo.</p>
+  <iframe
+    class="bg"
+    title="Matrix-style Aizawa attractor background"
+    src="https://codepen.io/VoXelo/embed/ogYXYyK?default-tab=result&theme-id=dark&editable=false"
+    loading="eager"
+    referrerpolicy="no-referrer-when-downgrade"
+  ></iframe>
+
+  <main class="content">
+    <h1>Hello from GitHub Pages</h1>
+    <p>This page is live because the files live in a GitHub repo.</p>
+  </main>
 
   <nav class="page-switch" aria-label="Pages">
     <a class="current" href="index.html">Page 1 · Bio</a>
